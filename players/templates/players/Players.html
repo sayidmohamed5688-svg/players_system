@@ -1,0 +1,16 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Players</title>
+  </head>
+  <body>
+    <h1>All Players</h1>
+
+    {% for player in players %}
+    <div>
+      <a href="/player/{{ player.id }}/">{{ player.name }}</a>
+      — {{ player.team }}
+    </div>
+    {% endfor %}
+  </body>
+</html>
