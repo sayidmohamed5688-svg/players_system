@@ -29,7 +29,6 @@
       .header h1 {
         font-size: 28px;
         color: #38bdf8;
-        letter-spacing: 1px;
       }
 
       .header p {
@@ -67,22 +66,9 @@
         font-size: 18px;
         font-weight: bold;
         color: #38bdf8;
-        margin-bottom: 10px;
+        margin-bottom: 8px;
       }
 
-      .field {
-        margin: 6px 0;
-        font-size: 14px;
-        color: #d1d5db;
-        line-height: 1.5;
-      }
-
-      .label {
-        color: #93c5fd;
-        font-weight: 600;
-      }
-
-      /* Badge */
       .team {
         display: inline-block;
         padding: 4px 10px;
@@ -93,72 +79,58 @@
         margin-bottom: 10px;
       }
 
-      /* Mobile optimization */
-      @media (max-width: 600px) {
-        .header h1 {
-          font-size: 22px;
-        }
+      .field {
+        margin: 6px 0;
+        font-size: 14px;
+        color: #d1d5db;
+      }
 
-        .container {
-          gap: 15px;
-        }
+      .label {
+        color: #93c5fd;
+        font-weight: 600;
+      }
+
+      /* Empty state */
+      .empty {
+        text-align: center;
+        color: #94a3b8;
+        margin-top: 50px;
+        font-size: 16px;
       }
     </style>
   </head>
   <body>
     <div class="header">
       <h1>Players Dashboard</h1>
-      <p>Professional Football Players Management System</p>
+      <p>Managed by Admin Panel</p>
     </div>
 
     <div class="container">
-      <!-- Player 1 -->
+      <!-- Django LOOP START -->
+      {% for player in players %}
+
       <div class="card">
-        <div class="name">John Doe</div>
-        <div class="team">Manchester City</div>
+        <div class="name">{{ player.name }}</div>
+        <div class="team">{{ player.team }}</div>
 
         <div class="field">
-          <span class="label">Phone:</span> +252 61 0000000
+          <span class="label">Phone:</span> {{ player.phone }}
         </div>
-        <div class="field"><span class="label">Xaafadda:</span> Hodan</div>
-        <div class="field"><span class="label">Age:</span> 22</div>
         <div class="field">
-          <span class="label">Bio:</span> Fast winger with elite dribbling and
-          high stamina under pressure.
+          <span class="label">Xaafadda:</span> {{ player.xaafadda }}
+        </div>
+        <div class="field">
+          <span class="label">Age:</span> {{ player.age }}
+        </div>
+        <div class="field">
+          <span class="label">Bio:</span> {{ player.bio }}
         </div>
       </div>
 
-      <!-- Player 2 -->
-      <div class="card">
-        <div class="name">Ali Ahmed</div>
-        <div class="team">Real Madrid</div>
-
-        <div class="field">
-          <span class="label">Phone:</span> +252 63 1111111
-        </div>
-        <div class="field"><span class="label">Xaafadda:</span> Waaberi</div>
-        <div class="field"><span class="label">Age:</span> 25</div>
-        <div class="field">
-          <span class="label">Bio:</span> Strong defender with leadership
-          mindset and excellent positioning.
-        </div>
-      </div>
-
-      <!-- Player 3 -->
-      <div class="card">
-        <div class="name">Mohamed Salah</div>
-        <div class="team">Liverpool</div>
-
-        <div class="field">
-          <span class="label">Phone:</span> +252 65 2222222
-        </div>
-        <div class="field"><span class="label">Xaafadda:</span> Heliwaa</div>
-        <div class="field"><span class="label">Age:</span> 29</div>
-        <div class="field">
-          <span class="label">Bio:</span> Explosive attacker with world-class
-          finishing and speed.
-        </div>
-      </div>
+      {% empty %}
+      <div class="empty">No players added yet by admin.</div>
+      {% endfor %}
+      <!-- Django LOOP END -->
     </div>
   </body>
 </html>
