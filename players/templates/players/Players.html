@@ -14,99 +14,138 @@
       }
 
       body {
-        background: #0b1220;
-        color: #e5e7eb;
+        background: radial-gradient(circle at top, #0f172a, #050816);
+        color: white;
+        min-height: 100vh;
       }
 
-      /* Header */
+      /* HEADER */
       .header {
         text-align: center;
-        padding: 25px 15px;
-        background: linear-gradient(135deg, #1e3a8a, #0f172a);
-        border-bottom: 1px solid #1f2937;
+        padding: 30px 15px;
       }
 
       .header h1 {
-        font-size: 28px;
-        color: #38bdf8;
+        font-size: 32px;
+        background: linear-gradient(90deg, #38bdf8, #60a5fa, #22d3ee);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-weight: bold;
+        letter-spacing: 1px;
       }
 
       .header p {
-        font-size: 14px;
         color: #94a3b8;
-        margin-top: 5px;
+        margin-top: 6px;
+        font-size: 14px;
       }
 
-      /* Container */
+      /* GRID */
       .container {
         width: 95%;
         max-width: 1200px;
-        margin: 30px auto;
+        margin: auto;
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
         gap: 20px;
+        padding: 20px 0 50px;
       }
 
-      /* Card */
+      /* CARD - GLASS EFFECT */
       .card {
-        background: #111827;
-        border-radius: 14px;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(12px);
+        border-radius: 16px;
         padding: 18px;
-        border: 1px solid #1f2937;
         transition: 0.3s ease;
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        position: relative;
+        overflow: hidden;
+      }
+
+      /* SHINY LIGHT EFFECT */
+      .card::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: linear-gradient(
+          120deg,
+          transparent,
+          rgba(56, 189, 248, 0.15),
+          transparent
+        );
+        transform: rotate(25deg);
+        transition: 0.5s;
+      }
+
+      .card:hover::before {
+        left: 100%;
       }
 
       .card:hover {
         transform: translateY(-6px);
         border-color: #38bdf8;
+        box-shadow: 0 10px 30px rgba(56, 189, 248, 0.2);
       }
 
+      /* NAME */
       .name {
         font-size: 18px;
         font-weight: bold;
         color: #38bdf8;
-        margin-bottom: 8px;
+        margin-bottom: 6px;
       }
 
+      /* TEAM BADGE */
       .team {
         display: inline-block;
-        padding: 4px 10px;
+        padding: 5px 12px;
         border-radius: 20px;
-        background: #1e3a8a;
-        color: #bfdbfe;
+        background: rgba(56, 189, 248, 0.15);
+        border: 1px solid rgba(56, 189, 248, 0.3);
+        color: #7dd3fc;
         font-size: 12px;
         margin-bottom: 10px;
       }
 
+      /* FIELDS */
       .field {
-        margin: 6px 0;
         font-size: 14px;
-        color: #d1d5db;
+        margin: 6px 0;
+        color: #cbd5e1;
+        line-height: 1.4;
       }
 
       .label {
-        color: #93c5fd;
+        color: #60a5fa;
         font-weight: 600;
       }
 
-      /* Empty state */
+      /* EMPTY */
       .empty {
         text-align: center;
         color: #94a3b8;
-        margin-top: 50px;
-        font-size: 16px;
+        margin-top: 40px;
+      }
+
+      /* MOBILE */
+      @media (max-width: 600px) {
+        .header h1 {
+          font-size: 24px;
+        }
       }
     </style>
   </head>
   <body>
     <div class="header">
       <h1>Players Dashboard</h1>
-      <p>Managed by Admin Panel</p>
+      <p>Clean • Modern • Professional Management System</p>
     </div>
 
     <div class="container">
-      <!-- Django LOOP START -->
       {% for player in players %}
 
       <div class="card">
@@ -128,9 +167,8 @@
       </div>
 
       {% empty %}
-      <div class="empty">No players added yet by admin.</div>
+      <div class="empty">No players available yet.</div>
       {% endfor %}
-      <!-- Django LOOP END -->
     </div>
   </body>
 </html>
