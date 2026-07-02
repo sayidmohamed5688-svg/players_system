@@ -1,16 +1,164 @@
 <!doctype html>
-<html>
+<html lang="en">
   <head>
-    <title>Players</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Players Dashboard</title>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Segoe UI", sans-serif;
+      }
+
+      body {
+        background: #0b1220;
+        color: #e5e7eb;
+      }
+
+      /* Header */
+      .header {
+        text-align: center;
+        padding: 25px 15px;
+        background: linear-gradient(135deg, #1e3a8a, #0f172a);
+        border-bottom: 1px solid #1f2937;
+      }
+
+      .header h1 {
+        font-size: 28px;
+        color: #38bdf8;
+        letter-spacing: 1px;
+      }
+
+      .header p {
+        font-size: 14px;
+        color: #94a3b8;
+        margin-top: 5px;
+      }
+
+      /* Container */
+      .container {
+        width: 95%;
+        max-width: 1200px;
+        margin: 30px auto;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 20px;
+      }
+
+      /* Card */
+      .card {
+        background: #111827;
+        border-radius: 14px;
+        padding: 18px;
+        border: 1px solid #1f2937;
+        transition: 0.3s ease;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+      }
+
+      .card:hover {
+        transform: translateY(-6px);
+        border-color: #38bdf8;
+      }
+
+      .name {
+        font-size: 18px;
+        font-weight: bold;
+        color: #38bdf8;
+        margin-bottom: 10px;
+      }
+
+      .field {
+        margin: 6px 0;
+        font-size: 14px;
+        color: #d1d5db;
+        line-height: 1.5;
+      }
+
+      .label {
+        color: #93c5fd;
+        font-weight: 600;
+      }
+
+      /* Badge */
+      .team {
+        display: inline-block;
+        padding: 4px 10px;
+        border-radius: 20px;
+        background: #1e3a8a;
+        color: #bfdbfe;
+        font-size: 12px;
+        margin-bottom: 10px;
+      }
+
+      /* Mobile optimization */
+      @media (max-width: 600px) {
+        .header h1 {
+          font-size: 22px;
+        }
+
+        .container {
+          gap: 15px;
+        }
+      }
+    </style>
   </head>
   <body>
-    <h1>All Players</h1>
-
-    {% for player in players %}
-    <div>
-      <a href="/player/{{ player.id }}/">{{ player.name }}</a>
-      — {{ player.team }}
+    <div class="header">
+      <h1>Players Dashboard</h1>
+      <p>Professional Football Players Management System</p>
     </div>
-    {% endfor %}
+
+    <div class="container">
+      <!-- Player 1 -->
+      <div class="card">
+        <div class="name">John Doe</div>
+        <div class="team">Manchester City</div>
+
+        <div class="field">
+          <span class="label">Phone:</span> +252 61 0000000
+        </div>
+        <div class="field"><span class="label">Xaafadda:</span> Hodan</div>
+        <div class="field"><span class="label">Age:</span> 22</div>
+        <div class="field">
+          <span class="label">Bio:</span> Fast winger with elite dribbling and
+          high stamina under pressure.
+        </div>
+      </div>
+
+      <!-- Player 2 -->
+      <div class="card">
+        <div class="name">Ali Ahmed</div>
+        <div class="team">Real Madrid</div>
+
+        <div class="field">
+          <span class="label">Phone:</span> +252 63 1111111
+        </div>
+        <div class="field"><span class="label">Xaafadda:</span> Waaberi</div>
+        <div class="field"><span class="label">Age:</span> 25</div>
+        <div class="field">
+          <span class="label">Bio:</span> Strong defender with leadership
+          mindset and excellent positioning.
+        </div>
+      </div>
+
+      <!-- Player 3 -->
+      <div class="card">
+        <div class="name">Mohamed Salah</div>
+        <div class="team">Liverpool</div>
+
+        <div class="field">
+          <span class="label">Phone:</span> +252 65 2222222
+        </div>
+        <div class="field"><span class="label">Xaafadda:</span> Heliwaa</div>
+        <div class="field"><span class="label">Age:</span> 29</div>
+        <div class="field">
+          <span class="label">Bio:</span> Explosive attacker with world-class
+          finishing and speed.
+        </div>
+      </div>
+    </div>
   </body>
 </html>

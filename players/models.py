@@ -10,7 +10,7 @@ class Player(models.Model):
     def __str__(self):
         return self.name
     
-class team(models.Model):
+class Team(models.Model):
     name=models.CharField(max_length=30)
     country=models.CharField(max_length=30)
     logo=models.URLField()
