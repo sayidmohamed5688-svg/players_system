@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ player.name }}</title>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+
+      body {
+        background: #0f172a;
+        color: white;
+      }
+
+      .container {
+        width: 90%;
+        max-width: 900px;
+        margin: 40px auto;
+      }
+
+      .card {
+        background: #1e293b;
+        border-radius: 18px;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+      }
+
+      .top {
+        background: linear-gradient(135deg, #2563eb, #0ea5e9);
+        padding: 40px 20px;
+        text-align: center;
+      }
+
+      .avatar {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        background: white;
+        color: #2563eb;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 42px;
+        font-weight: bold;
+        margin: auto;
+      }
+
+      .name {
+        margin-top: 20px;
+        font-size: 28px;
+        font-weight: bold;
+      }
+
+      .team {
+        margin-top: 8px;
+        display: inline-block;
+        background: white;
+        color: #2563eb;
+        padding: 6px 15px;
+        border-radius: 20px;
+        font-weight: bold;
+      }
+
+      .info {
+        padding: 30px;
+      }
+
+      .row {
+        display: flex;
+        justify-content: space-between;
+        padding: 15px 0;
+        border-bottom: 1px solid #334155;
+      }
+
+      .label {
+        color: #94a3b8;
+        font-weight: bold;
+      }
+
+      .value {
+        color: white;
+      }
+
+      .bio {
+        margin-top: 25px;
+      }
+
+      .bio h3 {
+        margin-bottom: 10px;
+        color: #38bdf8;
+      }
+
+      .bio p {
+        color: #cbd5e1;
+        line-height: 1.8;
+      }
+
+      .back {
+        display: inline-block;
+        margin-top: 30px;
+        text-decoration: none;
+        background: #2563eb;
+        color: white;
+        padding: 12px 20px;
+        border-radius: 8px;
+        transition: 0.3s;
+      }
+
+      .back:hover {
+        background: #1d4ed8;
+      }
+
+      @media (max-width: 600px) {
+        .row {
+          flex-direction: column;
+          gap: 6px;
+        }
+
+        .name {
+          font-size: 22px;
+        }
+
+        .avatar {
+          width: 90px;
+          height: 90px;
+          font-size: 32px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="card">
+        <div class="top">
+          <div class="avatar">{{ player.name|first }}</div>
+
+          <div class="name">{{ player.name }}</div>
+
+          <div class="team">{{ player.team }}</div>
+        </div>
+
+        <div class="info">
+          <div class="row">
+            <span class="label">Phone</span>
+            <span class="value">{{ player.phone }}</span>
+          </div>
+
+          <div class="row">
+            <span class="label">Xaafadda</span>
+            <span class="value">{{ player.xaafadda }}</span>
+          </div>
+
+          <div class="row">
+            <span class="label">Age</span>
+            <span class="value">{{ player.age }}</span>
+          </div>
+
+          <div class="bio">
+            <h3>Biography</h3>
+            <p>{{ player.bio }}</p>
+          </div>
+
+          <a href="{% url 'players' %}" class="back"> ← Back to Players </a>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
