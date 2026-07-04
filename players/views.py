@@ -24,7 +24,7 @@ def team_detail(request , pk):
     team=Team.objects.get(id=pk)
     return render (request , "players/team_detail.html", {"team": team })
 
-def matchs(request):
+def match(request):
     all_matchs=Match.objects.all()
     return render(request,"players/matchs.html", {"matches": all_matchs})
 
