@@ -3,65 +3,376 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Players</title>
+    <title>ciyaaraha</title>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
       rel="stylesheet"
     />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      rel="stylesheet"
+    />
     <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
       body {
-        background-color: #0d1117;
-        color: white;
+        background-color: #f8f5ee;
+        color: #1a1a2e;
+        font-family: "Segoe UI", sans-serif;
       }
-      .player-card {
-        background: linear-gradient(135deg, #1a1f2e, #16213e);
-        border: 1px solid #00ff88;
-        border-radius: 12px;
-        transition:
-          transform 0.3s,
-          box-shadow 0.3s;
+
+      /* ── NAVBAR ── */
+      .navbar {
+        background: linear-gradient(90deg, #1a1a2e, #2d2d44);
+        border-bottom: 3px solid #c9a84c;
+        padding: 18px 30px;
+        position: sticky;
+        top: 0;
+        z-index: 999;
+        box-shadow: 0 4px 20px rgba(201, 168, 76, 0.2);
       }
-      .player-card:hover {
-        transform: translateY(-8px);
-        box-shadow: 0 0 20px #00ff8855;
+      .navbar-brand {
+        color: #c9a84c !important;
+        font-size: 1.6rem;
+        font-weight: 900;
+        letter-spacing: 3px;
       }
-      h1 {
-        color: #00ff88;
-        font-weight: bold;
+      .nav-link {
+        color: #ccc !important;
+        margin: 0 12px;
+        transition: color 0.3s;
+        font-size: 0.9rem;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+      }
+      .nav-link:hover {
+        color: #c9a84c !important;
+      }
+      .nav-link.active {
+        color: #c9a84c !important;
+        border-bottom: 2px solid #c9a84c;
+      }
+
+      /* ── HERO ── */
+      .hero {
+        background: linear-gradient(
+          135deg,
+          #1a1a2e 0%,
+          #2d2d44 50%,
+          #1a1a2e 100%
+        );
+        padding: 90px 20px 70px;
         text-align: center;
-        padding: 40px 0 20px;
+        position: relative;
+        overflow: hidden;
+      }
+      .hero::before {
+        content: "⚽";
+        position: absolute;
+        font-size: 400px;
+        opacity: 0.03;
+        top: -80px;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+      .hero-subtitle {
+        color: #c9a84c;
+        font-size: 0.85rem;
+        letter-spacing: 6px;
+        text-transform: uppercase;
+        margin-bottom: 15px;
+      }
+      .hero h1 {
+        color: #ffffff;
+        font-size: 4rem;
+        font-weight: 900;
+        letter-spacing: 4px;
+        margin-bottom: 15px;
+      }
+      .hero h1 span {
+        color: #c9a84c;
+      }
+      .hero p {
+        color: #888;
+        font-size: 1.05rem;
+        margin-bottom: 25px;
+      }
+      .hero-badge {
+        display: inline-block;
+        background: transparent;
+        border: 1px solid #c9a84c;
+        color: #c9a84c;
+        padding: 8px 24px;
+        border-radius: 30px;
+        font-size: 0.8rem;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+      }
+
+      /* ── STATS BAR ── */
+      .stats-bar {
+        background: #ffffff;
+        border-bottom: 1px solid #e8e0cc;
+        border-top: 1px solid #e8e0cc;
+        padding: 25px 0;
+        box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+      }
+      .stat-item {
+        text-align: center;
+        border-right: 1px solid #e8e0cc;
+      }
+      .stat-item:last-child {
+        border-right: none;
+      }
+      .stat-number {
+        color: #c9a84c;
+        font-size: 2rem;
+        font-weight: 900;
+      }
+      .stat-label {
+        color: #999;
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        margin-top: 3px;
+      }
+
+      /* ── SECTION TITLE ── */
+      .section-title {
+        text-align: center;
+        padding: 50px 0 30px;
+      }
+      .section-title h2 {
+        color: #1a1a2e;
+        font-size: 2rem;
+        font-weight: 900;
         letter-spacing: 2px;
       }
+      .section-title h2 span {
+        color: #c9a84c;
+      }
+      .title-line {
+        width: 60px;
+        height: 3px;
+        background: linear-gradient(90deg, #c9a84c, #f0d080);
+        margin: 12px auto 0;
+        border-radius: 2px;
+      }
+
+      /* ── PLAYER CARDS ── */
+      .player-card {
+        background: #ffffff;
+        border: 1px solid #e8e0cc;
+        border-radius: 20px;
+        transition: all 0.4s ease;
+        overflow: hidden;
+        height: 100%;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+      }
+      .player-card:hover {
+        transform: translateY(-12px);
+        box-shadow: 0 20px 40px rgba(201, 168, 76, 0.2);
+        border-color: #c9a84c;
+      }
+      .card-top {
+        background: linear-gradient(135deg, #1a1a2e, #2d2d44);
+        padding: 35px 20px 25px;
+        text-align: center;
+        position: relative;
+      }
+      .player-number {
+        position: absolute;
+        top: 12px;
+        right: 18px;
+        color: #c9a84c44;
+        font-size: 2.5rem;
+        font-weight: 900;
+      }
+      .player-avatar {
+        width: 85px;
+        height: 85px;
+        background: linear-gradient(135deg, #c9a84c22, #c9a84c11);
+        border: 2px solid #c9a84c;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 15px;
+        font-size: 2.5rem;
+      }
+      .player-name {
+        color: #ffffff;
+        font-size: 1.1rem;
+        font-weight: 700;
+        margin-bottom: 6px;
+      }
+      .player-team {
+        color: #c9a84c;
+        font-size: 0.82rem;
+        font-weight: 500;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+      }
+      .card-body-custom {
+        padding: 22px;
+      }
+      .info-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 0;
+        border-bottom: 1px solid #f0ece0;
+        font-size: 0.85rem;
+      }
+      .info-row:last-of-type {
+        border-bottom: none;
+        margin-bottom: 5px;
+      }
+      .info-key {
+        color: #999;
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+      .info-val {
+        color: #1a1a2e;
+        font-weight: 600;
+      }
       .btn-view {
-        background-color: #00ff88;
-        color: #0d1117;
-        font-weight: bold;
+        background: linear-gradient(90deg, #c9a84c, #f0d080);
+        color: #1a1a2e;
+        font-weight: 700;
         border: none;
+        border-radius: 10px;
+        width: 100%;
+        padding: 12px;
+        margin-top: 15px;
+        transition: all 0.3s;
+        text-decoration: none;
+        display: block;
+        text-align: center;
+        font-size: 0.85rem;
+        letter-spacing: 2px;
+        text-transform: uppercase;
       }
       .btn-view:hover {
-        background-color: #00cc66;
-        color: #0d1117;
+        background: linear-gradient(90deg, #b8963d, #c9a84c);
+        color: #1a1a2e;
+        transform: scale(1.02);
+        box-shadow: 0 5px 15px rgba(201, 168, 76, 0.4);
+      }
+
+      /* ── FOOTER ── */
+      .footer {
+        background: linear-gradient(90deg, #1a1a2e, #2d2d44);
+        border-top: 3px solid #c9a84c;
+        padding: 35px 0;
+        text-align: center;
+        color: #666;
+        font-size: 0.85rem;
+        margin-top: 60px;
+      }
+      .footer span {
+        color: #c9a84c;
+        font-weight: 700;
       }
     </style>
   </head>
   <body>
-    <div class="container">
-      <h1>⚽ All Players</h1>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg">
+      <a class="navbar-brand" href="{% url 'players' %}">
+        ⚽ Wararka ciyaaraha
+      </a>
+      <div class="ms-auto d-flex align-items-center">
+        <a href="{% url 'players' %}" class="nav-link active">Players</a>
+        <a href="{% url 'news' %}" class="nav-link">News</a>
+        <a href="{% url 'teams' %}" class="nav-link">Teams</a>
+        <a href="{% url 'matches' %}" class="nav-link">Matches</a>
+      </div>
+    </nav>
+
+    <!-- Hero -->
+    <div class="hero">
+      <p class="hero-subtitle">⭐warar iyo xogo leh tayo sarre</p>
+      <h1>Hel warka <span>Markastaba</span></h1>
+      <p>ogow taatikada macalimiintu adeegsato kulan kasta</p>
+      <span class="hero-badge">
+        <i class="fa fa-users"></i> &nbsp;{{ players|length }} Players
+        Registered
+      </span>
+    </div>
+
+    <!-- Stats Bar -->
+    <div class="stats-bar">
+      <div class="container">
+        <div class="row">
+          <div class="col-4 stat-item">
+            <p class="stat-number">{{ players|length }}</p>
+            <p class="stat-label">Players</p>
+          </div>
+          <div class="col-4 stat-item">
+            <p class="stat-number">🏆</p>
+            <p class="stat-label">Kooxaha ugu fiican</p>
+          </div>
+          <div class="col-4 stat-item">
+            <p class="stat-number">⚽</p>
+            <p class="stat-label">Warka live ka</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section Title -->
+    <div class="section-title">
+      <h2>All <span>Players</span></h2>
+      <div class="title-line"></div>
+    </div>
+
+    <!-- Players Grid -->
+    <div class="container pb-5">
       <div class="row g-4">
         {% for player in players %}
-        <div class="col-md-4">
-          <div class="player-card p-4">
-            <h4 class="text-white">{{ player.name }}</h4>
-            <p class="text-secondary mb-1">🏟️ {{ player.team }}</p>
-            <p class="text-secondary mb-3">🎂 Age: {{ player.age }}</p>
-            <a href="{% url 'player_detail' player.id %}" class="btn btn-view">
-              View Profile
-            </a>
+        <div class="col-lg-4 col-md-6">
+          <div class="player-card">
+            <div class="card-top">
+              <span class="player-number">#{{ player.id }}</span>
+              <div class="player-avatar">👤</div>
+              <p class="player-name">{{ player.name }}</p>
+              <p class="player-team">
+                <i class="fa fa-shield-halved"></i>
+                {{ player.team }}
+              </p>
+            </div>
+            <div class="card-body-custom">
+              <div class="info-row">
+                <span class="info-key">🎂 Age</span>
+                <span class="info-val">{{ player.age }}</span>
+              </div>
+              <div class="info-row">
+                <span class="info-key">📍 Address</span>
+                <span class="info-val">{{ player.xaafadd }}</span>
+              </div>
+              <a href="{% url 'player_detail' player.id %}" class="btn-view">
+                View Profile →
+              </a>
+            </div>
           </div>
         </div>
         {% endfor %}
       </div>
     </div>
+
+    <!-- Footer -->
+    <div class="footer">
+      <p>
+        ⚽ <span>taatikadda kubadda</span> waxaa sameeyay by <span>Sayid</span>
+      </p>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>

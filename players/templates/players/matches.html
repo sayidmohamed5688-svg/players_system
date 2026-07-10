@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Match Results</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        background-color: #0a0e1a;
+        color: white;
+        font-family: "Segoe UI", sans-serif;
+      }
+      .navbar {
+        background: linear-gradient(90deg, #0d1117, #1a1f2e);
+        border-bottom: 2px solid #00ff88;
+        padding: 15px 30px;
+      }
+      .navbar-brand {
+        color: #00ff88 !important;
+        font-size: 1.5rem;
+        font-weight: bold;
+        letter-spacing: 2px;
+      }
+      .nav-link {
+        color: #ccc !important;
+        margin: 0 10px;
+        transition: color 0.3s;
+      }
+      .nav-link:hover {
+        color: #00ff88 !important;
+      }
+      .hero {
+        text-align: center;
+        padding: 60px 20px 30px;
+      }
+      .hero h1 {
+        color: #00ff88;
+        font-size: 3rem;
+        font-weight: bold;
+        letter-spacing: 3px;
+        text-shadow: 0 0 20px #00ff8855;
+      }
+      .hero p {
+        color: #888;
+        font-size: 1.1rem;
+        margin-top: 10px;
+      }
+      .match-card {
+        background: linear-gradient(135deg, #1a1f2e, #16213e);
+        border: 1px solid #00ff8844;
+        border-radius: 16px;
+        transition:
+          transform 0.3s,
+          box-shadow 0.3s,
+          border-color 0.3s;
+        overflow: hidden;
+      }
+      .match-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 10px 30px #00ff8833;
+        border-color: #00ff88;
+      }
+      .match-header {
+        background: linear-gradient(135deg, #00ff8811, #00ff8822);
+        padding: 15px 20px;
+        border-bottom: 1px solid #00ff8833;
+        text-align: center;
+      }
+      .match-date {
+        color: #00ff88;
+        font-size: 0.85rem;
+      }
+      .match-stadium {
+        color: #888;
+        font-size: 0.8rem;
+      }
+      .score-section {
+        padding: 25px 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .team-name {
+        color: white;
+        font-size: 1rem;
+        font-weight: bold;
+        text-align: center;
+        width: 35%;
+      }
+      .score-display {
+        text-align: center;
+        width: 30%;
+      }
+      .score-number {
+        color: #00ff88;
+        font-size: 2.5rem;
+        font-weight: bold;
+        letter-spacing: 5px;
+      }
+      .vs-text {
+        color: #555;
+        font-size: 0.8rem;
+      }
+      .btn-view {
+        background: linear-gradient(90deg, #00ff88, #00cc66);
+        color: #0d1117;
+        font-weight: bold;
+        border: none;
+        border-radius: 0 0 16px 16px;
+        width: 100%;
+        padding: 12px;
+        transition: opacity 0.3s;
+        text-decoration: none;
+        display: block;
+        text-align: center;
+      }
+      .btn-view:hover {
+        opacity: 0.85;
+        color: #0d1117;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg">
+      <span class="navbar-brand">⚽ FootballNews</span>
+      <div class="ms-auto d-flex">
+        <a href="{% url 'players' %}" class="nav-link">Players</a>
+        <a href="{% url 'news' %}" class="nav-link">News</a>
+        <a href="{% url 'teams' %}" class="nav-link">Teams</a>
+        <a href="{% url 'matches' %}" class="nav-link">Matches</a>
+      </div>
+    </nav>
+
+    <!-- Hero -->
+    <div class="hero">
+      <h1>🏆 Match Results</h1>
+      <p>Latest football match scores and results</p>
+    </div>
+
+    <!-- Matches Grid -->
+    <div class="container pb-5">
+      <div class="row g-4">
+        {% for match in matches %}
+        <div class="col-md-6">
+          <div class="match-card">
+            <div class="match-header">
+              <p class="match-date">📅 {{ match.date }}</p>
+              <p class="match-stadium">🏟️ {{ match.stadium }}</p>
+            </div>
+            <div class="score-section">
+              <div class="team-name">{{ match.home_team }}</div>
+              <div class="score-display">
+                <p class="score-number">
+                  {{ match.home_team_score }} - {{ match.away_team_score }}
+                </p>
+                <p class="vs-text">FULL TIME</p>
+              </div>
+              <div class="team-name">{{ match.away_team }}</div>
+            </div>
+            <a href="{% url 'match_detail' match.id %}" class="btn-view">
+              View Match Details →
+            </a>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

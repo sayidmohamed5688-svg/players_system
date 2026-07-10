@@ -26,8 +26,8 @@ def team_detail(request , pk):
 
 def match(request):
     all_matchs=Match.objects.all()
-    return render(request,"players/matchs.html", {"matches": all_matchs})
+    return render(request,"players/matches.html", {"matches": all_matchs})
 
 def match_detail(request , pk):
-    match=match=object.get(id=pk)
-    return render(request , "players/match_detail", {"match": match})
+    match=Match.objects.get(id=pk)
+    return render(request , "players/match_detail.html", {"match": match})
