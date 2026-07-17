@@ -3,80 +3,142 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Football News</title>
+    <title>{{ article.title }}</title>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
       rel="stylesheet"
     />
     <style>
       body {
-        background-color: #0d1117;
-        color: white;
+        background-color: #f8f5ee;
+        font-family: "Segoe UI", sans-serif;
       }
-      h1 {
-        color: #00ff88;
-        font-weight: bold;
-        text-align: center;
-        padding: 40px 0 20px;
-        letter-spacing: 2px;
+      .navbar {
+        background: linear-gradient(90deg, #1a1a2e, #2d2d44);
+        border-bottom: 3px solid #c9a84c;
+        padding: 18px 30px;
       }
-      .news-card {
-        background: linear-gradient(135deg, #1a1f2e, #16213e);
-        border: 1px solid #00ff88;
-        border-radius: 12px;
-        transition:
-          transform 0.3s,
-          box-shadow 0.3s;
+      .navbar-brand {
+        color: #c9a84c !important;
+        font-weight: 900;
+        letter-spacing: 3px;
+      }
+      .nav-link {
+        color: #ccc !important;
+        margin: 0 12px;
+        text-transform: uppercase;
+        font-size: 0.9rem;
+      }
+      .nav-link:hover {
+        color: #c9a84c !important;
+      }
+      .article-card {
+        background: #ffffff;
+        border: 1px solid #e8e0cc;
+        border-radius: 20px;
         overflow: hidden;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        margin-top: 40px;
       }
-      .news-card:hover {
-        transform: translateY(-8px);
-        box-shadow: 0 0 20px #00ff8855;
-      }
-      .news-card img {
+      .article-image {
         width: 100%;
-        height: 200px;
+        max-height: 420px;
         object-fit: cover;
       }
-      .news-date {
-        color: #00ff88;
+      .article-body {
+        padding: 40px;
+      }
+      .article-date {
+        color: #c9a84c;
         font-size: 0.85rem;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        margin-bottom: 15px;
       }
-      .btn-read {
-        background-color: #00ff88;
-        color: #0d1117;
-        font-weight: bold;
+      .article-title {
+        color: #1a1a2e;
+        font-size: 2.2rem;
+        font-weight: 900;
+        margin-bottom: 20px;
+        line-height: 1.3;
+      }
+      .article-content {
+        color: #555;
+        font-size: 1.05rem;
+        line-height: 1.9;
+      }
+      .back-btn {
+        background: linear-gradient(90deg, #c9a84c, #f0d080);
+        color: #1a1a2e;
+        font-weight: 700;
         border: none;
+        border-radius: 10px;
+        padding: 12px 30px;
+        text-decoration: none;
+        display: inline-block;
+        margin-top: 30px;
+        letter-spacing: 1px;
       }
-      .btn-read:hover {
-        background-color: #00cc66;
-        color: #0d1117;
+      .back-btn:hover {
+        background: linear-gradient(90deg, #b8963d, #c9a84c);
+        color: #1a1a2e;
+      }
+      .footer {
+        background: linear-gradient(90deg, #1a1a2e, #2d2d44);
+        border-top: 3px solid #c9a84c;
+        padding: 30px 0;
+        text-align: center;
+        color: #666;
+        font-size: 0.85rem;
+        margin-top: 60px;
+      }
+      .footer span {
+        color: #c9a84c;
+        font-weight: 700;
       }
     </style>
   </head>
   <body>
-    <div class="container">
-      <h1>📰 Latest News</h1>
-      <div class="row g-4">
-        {% for article in news %}
-        <div class="col-md-4">
-          <div class="news-card">
-            <img src="{{ article.image }}" alt="{{ article.title }}" />
-            <div class="p-4">
-              <h5 class="text-white">{{ article.title }}</h5>
-              <p class="news-date">📅 {{ article.date }}</p>
-              <p class="text-secondary">
-                {{ article.content|truncatewords:20 }}
-              </p>
-              <a href="{% url 'news_detail' article.id %}" class="btn btn-read">
-                Read More
-              </a>
-            </div>
-          </div>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg">
+      <a class="navbar-brand" href="{% url 'players' %}">⚽ FootballNews</a>
+      <div class="ms-auto d-flex">
+        <a href="{% url 'players' %}" class="nav-link">Players</a>
+        <a
+          href="{% url 'news' %}"
+          class="nav-link active"
+          style="color: #c9a84c !important"
+          >News</a
+        >
+        <a href="{% url 'teams' %}" class="nav-link">Teams</a>
+        <a href="{% url 'matches' %}" class="nav-link">Matches</a>
+      </div>
+    </nav>
+
+    <div class="container pb-5">
+      <div class="article-card">
+        <img
+          src="{{ article.image }}"
+          alt="{{ article.title }}"
+          class="article-image"
+        />
+        <div class="article-body">
+          <p class="article-date">📅 {{ article.date }}</p>
+          <h1 class="article-title">{{ article.title }}</h1>
+          <hr style="border-color: #e8e0cc; margin-bottom: 25px" />
+          <p class="article-content">{{ article.content }}</p>
+          <a href="{% url 'news' %}" class="back-btn"> ← Back to News </a>
         </div>
-        {% endfor %}
       </div>
     </div>
+
+    <!-- Footer -->
+    <div class="footer">
+      <p>
+        ⚽ <span>FootballNews</span> — Built with Django by <span>Sayid</span>
+      </p>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>
